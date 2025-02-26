@@ -39,6 +39,3 @@ You can access the API endpoints using a web browser or tools like Postman.
 - Sorting without built-in methods: [StackOverflow](https://stackoverflow.com/questions/33266885/sort-string-without-any-builtin-methods)
 - Finding the average of an array: [StackOverflow](https://stackoverflow.com/questions/29544371/finding-the-average-of-an-array-using-js)
 
-## License
-This project is open-source and available for use under the MIT License.
-
