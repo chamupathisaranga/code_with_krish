@@ -12,6 +12,8 @@ export class Order {
   @PrimaryGeneratedColumn()
   id: number;
   @Column()
+  city: string;
+  @Column()
   customerId: number;
   @CreateDateColumn()
   createdAt: Date;

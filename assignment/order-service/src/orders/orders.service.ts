@@ -48,7 +48,7 @@ export class OrdersService implements OnModuleInit {
   }
 
   async create(createOrderDto: createOrderDto): Promise<any> {
-    const { customerId, items } = createOrderDto;
+    const { customerId, city, items } = createOrderDto;
     //--------customer
     // Validate customer exists
     let customerName = '';
@@ -87,7 +87,7 @@ export class OrdersService implements OnModuleInit {
     this.Producer.send({
       topic: 'chamupathi.order.create',
       messages: [
-        { value: JSON.stringify({ customerId, customerName, items }) },
+        { value: JSON.stringify({ customerId, customerName, items, city }) },
       ],
     });
 
@@ -189,11 +189,15 @@ export class OrdersService implements OnModuleInit {
           'Order Confirmed to save--------------------------------',
           message.value.toString(),
         );
-        const { customerId, items } = JSON.parse(message.value.toString());
+        const { city, customerId, items } = JSON.parse(
+          message.value.toString(),
+        );
+        console.log('city=======================', city);
 
         const order = this.orderRepository.create({
           customerId,
           status: OrderStatus.CONFIRMED,
+          city,
         });
 
         const savedOrder = await this.orderRepository.save(order);

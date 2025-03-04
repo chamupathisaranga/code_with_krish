@@ -13,6 +13,7 @@ class OrderItemDto {
 export class createOrderDto {
   @IsInt()
   customerId: number;
+  city: string;
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => OrderItemDto)

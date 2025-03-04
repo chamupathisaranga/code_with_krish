@@ -24,7 +24,7 @@ export class NotificationService implements OnModuleInit {
   }
 
   async consumeNotification() {
-    console.log("consumeNotification")
+    console.log('consumeNotification');
     await this.consumer.subscribe({
       topic: 'chamupathi.order.confirmed',
       fromBeginning: true, // Read messages from the beginning

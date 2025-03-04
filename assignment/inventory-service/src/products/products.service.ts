@@ -75,9 +75,10 @@ export class ProductsService implements OnModuleInit {
     await this.consumer.run({
       eachMessage: async ({ message }) => {
         console.log('new message arrived Order------------------------');
-        const { customerId, customerName, items } = JSON.parse(
+        const { customerId, customerName, items, city } = JSON.parse(
           message.value.toString(),
         );
+
         for (const item of items) {
           await this.reduceStock(item.productId, item.quantity);
         }
@@ -87,10 +88,13 @@ export class ProductsService implements OnModuleInit {
           await this.redis.del(lockey);
         }
 
+        console.log('city-----------------------', city);
         this.Producer.send({
           topic: 'chamupathi.order.inventory.update',
           messages: [
-            { value: JSON.stringify({ customerId, customerName, items }) },
+            {
+              value: JSON.stringify({ city, customerId, customerName, items }),
+            },
           ],
         });
       },
